@@ -70,17 +70,24 @@ func (m *CommonResp) GetErrorMsg() string {
 }
 
 type CreateGroupReq struct {
-	MemberList           []*GroupAddMemberInfo `protobuf:"bytes,1,rep,name=memberList" json:"memberList,omitempty"`
-	GroupName            string                `protobuf:"bytes,2,opt,name=groupName" json:"groupName,omitempty"`
-	Introduction         string                `protobuf:"bytes,3,opt,name=introduction" json:"introduction,omitempty"`
-	Notification         string                `protobuf:"bytes,4,opt,name=notification" json:"notification,omitempty"`
-	FaceUrl              string                `protobuf:"bytes,5,opt,name=faceUrl" json:"faceUrl,omitempty"`
-	Token                string                `protobuf:"bytes,6,opt,name=token" json:"token,omitempty"`
-	OperationID          string                `protobuf:"bytes,7,opt,name=operationID" json:"operationID,omitempty"`
-	Ex                   string                `protobuf:"bytes,8,opt,name=ex" json:"ex,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	//初始群成员setRole 0为普通成员 1为群主 2为管理员
+	MemberList []*GroupAddMemberInfo `protobuf:"bytes,1,rep,name=memberList" json:"memberList,omitempty"`
+	//群聊的名字
+	GroupName string `protobuf:"bytes,2,opt,name=groupName" json:"groupName,omitempty"`
+	//群简介
+	Introduction string `protobuf:"bytes,3,opt,name=introduction" json:"introduction,omitempty"`
+	//群公告
+	Notification string `protobuf:"bytes,4,opt,name=notification" json:"notification,omitempty"`
+	//群头像
+	FaceUrl string `protobuf:"bytes,5,opt,name=faceUrl" json:"faceUrl,omitempty"`
+	//从header中获取，此token必须以APP管理员身份调用auth/user_token生成，具体参考换取管理员IMToken
+	Token string `protobuf:"bytes,6,opt,name=token" json:"token,omitempty"`
+	//操作id，用随机字符串
+	OperationID          string   `protobuf:"bytes,7,opt,name=operationID" json:"operationID,omitempty"`
+	Ex                   string   `protobuf:"bytes,8,opt,name=ex" json:"ex,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CreateGroupReq) Reset()         { *m = CreateGroupReq{} }
@@ -2028,10 +2035,14 @@ func (m *GetJoinedGroupListResp) GetGroupList() []*GroupInfo {
 }
 
 type InviteUserToGroupReq struct {
-	Token                string   `protobuf:"bytes,1,opt,name=token" json:"token,omitempty"`
-	OperationID          string   `protobuf:"bytes,2,opt,name=operationID" json:"operationID,omitempty"`
-	GroupID              string   `protobuf:"bytes,3,opt,name=groupID" json:"groupID,omitempty"`
-	Reason               string   `protobuf:"bytes,4,opt,name=reason" json:"reason,omitempty"`
+	Token string `protobuf:"bytes,1,opt,name=token" json:"token,omitempty"`
+	//操作id，用随机字符串
+	OperationID string `protobuf:"bytes,2,opt,name=operationID" json:"operationID,omitempty"`
+
+	GroupID string `protobuf:"bytes,3,opt,name=groupID" json:"groupID,omitempty"`
+	//进群理由
+	Reason string `protobuf:"bytes,4,opt,name=reason" json:"reason,omitempty"`
+	//被邀请进群的用户uid列表
 	UidList              []string `protobuf:"bytes,5,rep,name=uidList" json:"uidList,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`

@@ -1,10 +1,10 @@
 package group
 
 import (
-	pb "Open_IM/pkg/proto/group"
 	"Open_IM/pkg/common/config"
 	"Open_IM/pkg/common/log"
 	"Open_IM/pkg/grpc-etcdv3/getcdv3"
+	pb "Open_IM/pkg/proto/group"
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -317,6 +317,7 @@ func InviteUserToGroup(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"errCode": 400, "errMsg": err.Error()})
 		return
 	}
+
 	req := &pb.InviteUserToGroupReq{
 		OperationID: params.OperationID,
 		GroupID:     params.GroupID,
@@ -324,6 +325,7 @@ func InviteUserToGroup(c *gin.Context) {
 		UidList:     params.UidList,
 		Token:       c.Request.Header.Get("token"),
 	}
+
 	log.Info(req.Token, req.OperationID, "recv req: ", req.String())
 
 	RpcResp, err := client.InviteUserToGroup(context.Background(), req)
