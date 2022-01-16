@@ -9,7 +9,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 )
 
@@ -48,8 +47,9 @@ func (rpc *rpcAuth) Run() {
 	//service registers with etcd
 
 	pbAuth.RegisterAuthServer(srv, rpc)
-	host := viper.GetString("endpoints.rpc_auth")
-	err = getcdv3.RegisterEtcd(rpc.etcdSchema, strings.Join(rpc.etcdAddr, ","), host, rpc.rpcPort, rpc.rpcRegisterName, 10)
+	//host := viper.GetString("endpoints.rpc_auth")
+
+	err = getcdv3.RegisterEtcd(rpc.etcdSchema, strings.Join(rpc.etcdAddr, ","), "127.0.0.1", rpc.rpcPort, rpc.rpcRegisterName, 10)
 	if err != nil {
 		log.Error("", "", "register rpc get_token to etcd failed, err = %s", err.Error())
 		return

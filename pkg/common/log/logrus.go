@@ -2,7 +2,6 @@ package log
 
 import (
 	"Open_IM/pkg/common/config"
-	"bufio"
 	"fmt"
 	nested "github.com/antonfisher/nested-logrus-formatter"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
@@ -30,30 +29,29 @@ func NewPrivateLog(moduleName string) {
 func loggerInit(moduleName string) *Logger {
 	var logger = logrus.New()
 	//All logs will be printed
-	logger.SetLevel(logrus.Level(config.Config.Log.RemainLogLevel))
+	logger.SetLevel(logrus.Level(logrus.DebugLevel))
 	//Close std console output
-	src, err := os.OpenFile(os.DevNull, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
-	if err != nil {
-		panic(err.Error())
-	}
-	writer := bufio.NewWriter(src)
-	logger.SetOutput(writer)
+	//src, err := os.OpenFile(os.DevNull, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
+	//if err != nil {
+	//	panic(err.Error())
+	//}
+	//writer := bufio.NewWriter(src)
+	//logger.SetOutput(writer)
 	//Log Console Print Style Setting
-	logger.SetFormatter(&nested.Formatter{
-		TimestampFormat: "2006-01-02 15:04:05.000",
-		HideKeys:        false,
-		FieldsOrder:     []string{"PID", "FilePath", "OperationID"},
-	})
+	logger.SetFormatter(&logrus.JSONFormatter{})
+
+	logger.SetOutput(os.Stdout)
+
 	//File name and line number display hook
-	logger.AddHook(newFileHook())
+	//logger.AddHook(newFileHook())
 
 	//Send logs to elasticsearch hook
-	if config.Config.Log.ElasticSearchSwitch {
-		logger.AddHook(newEsHook(moduleName))
-	}
-	//Log file segmentation hook
-	hook := NewLfsHook(time.Duration(config.Config.Log.RotationTime)*time.Hour, config.Config.Log.RemainRotationCount, moduleName)
-	logger.AddHook(hook)
+	//if config.Config.Log.ElasticSearchSwitch {
+	//	logger.AddHook(newEsHook(moduleName))
+	//}
+	////Log file segmentation hook
+	//hook := NewLfsHook(time.Duration(config.Config.Log.RotationTime)*time.Hour, config.Config.Log.RemainRotationCount, moduleName)
+	//logger.AddHook(hook)
 	return &Logger{
 		logger,
 		os.Getpid(),

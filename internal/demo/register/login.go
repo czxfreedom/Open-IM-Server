@@ -89,7 +89,8 @@ func Login(c *gin.Context) {
 }
 
 func OpenIMToken(Account string, platform int32) (*http.Response, error) {
-	url := fmt.Sprintf("http://%s:10000/auth/user_token", viper.GetString("endpoints.api"))
+	//url := fmt.Sprintf("http://%s:10000/auth/user_token", viper.GetString("endpoints.api"))
+	url := fmt.Sprintf("http://%s:10000/auth/user_token", viper.GetString("127.0.0.1"))
 
 	client := &http.Client{}
 	params := make(map[string]interface{})
