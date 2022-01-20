@@ -265,21 +265,34 @@ message GetGroupAllMemberResp {
 
 
 service group{
+  //创建组
   rpc createGroup(CreateGroupReq) returns(CreateGroupResp);
+  //加入组
   rpc joinGroup(JoinGroupReq) returns(CommonResp);
+  //退出组
   rpc quitGroup(QuitGroupReq) returns(CommonResp);
+  //获取组信息
   rpc getGroupsInfo(GetGroupsInfoReq) returns(GetGroupsInfoResp);
+  //设置组信息
   rpc setGroupInfo(SetGroupInfoReq) returns(CommonResp);
+  //获取组
   rpc getGroupApplicationList(GetGroupApplicationListReq) returns(GetGroupApplicationListResp);
+  //转让群主
   rpc transferGroupOwner(TransferGroupOwnerReq) returns(TransferGroupOwnerResp);
+  //
   rpc groupApplicationResponse(GroupApplicationResponseReq) returns(GroupApplicationResponseResp);
   //  rpc setOwnerGroupNickName(SetOwnerGroupNickNameReq) returns(CommonResp);
+  //获取群成员列表
   rpc getGroupMemberList(GetGroupMemberListReq) returns(GetGroupMemberListResp);
+  //获取群成员信息
   rpc getGroupMembersInfo(GetGroupMembersInfoReq) returns(GetGroupMembersInfoResp);
+  //标记群成员备注
   rpc kickGroupMember(KickGroupMemberReq) returns (KickGroupMemberResp);
+  //
   rpc getJoinedGroupList(getJoinedGroupListReq) returns (getJoinedGroupListResp);
+  //邀请用户加入群组
   rpc inviteUserToGroup(inviteUserToGroupReq) returns (inviteUserToGroupResp);
-
+  //获取全部组成员
   rpc getGroupAllMember(GetGroupAllMemberReq) returns(GetGroupAllMemberResp);
 }
 

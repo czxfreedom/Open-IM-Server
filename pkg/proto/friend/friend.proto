@@ -166,18 +166,32 @@ message SetFriendCommentReq{
 }
 
 service friend{
+  //根据用户id获取他的朋友信息
   rpc getFriendsInfo(GetFriendsInfoReq) returns(GetFriendInfoResp);
+  //添加朋友
   rpc addFriend(AddFriendReq) returns(CommonResp);
+  //获取添加朋友请求列表
   rpc getFriendApplyList(GetFriendApplyReq) returns(GetFriendApplyResp);
+  //
   rpc getSelfApplyList(GetFriendApplyReq) returns(GetFriendApplyResp);
+  //
   rpc getFriendList(getFriendListReq) returns(getFriendListResp);
+  //添加到黑名单
   rpc addBlacklist(AddBlacklistReq) returns(CommonResp);
+  //从黑名单移除
   rpc removeBlacklist(RemoveBlacklistReq) returns(CommonResp);
+  //是否是朋友
   rpc isFriend(IsFriendReq) returns(IsFriendResp);
+  //是否在黑名单列表里面
   rpc isInBlackList(IsInBlackListReq) returns(IsInBlackListResp);
+  //获取黑名单列表
   rpc getBlacklist(GetBlacklistReq) returns(GetBlacklistResp);
+  //删除朋友
   rpc deleteFriend(DeleteFriendReq) returns(CommonResp);
+  //添加朋友
   rpc addFriendResponse(AddFriendResponseReq) returns(CommonResp);
+  //设置朋友备注
   rpc setFriendComment(SetFriendCommentReq) returns(CommonResp);
+  //导入朋友
   rpc ImportFriend(ImportFriendReq)  returns(ImportFriendResp);
 }

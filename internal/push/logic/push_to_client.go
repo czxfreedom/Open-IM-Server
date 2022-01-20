@@ -42,6 +42,7 @@ func MsgToUser(sendPbData *pbRelay.MsgToUserReq, OfflineInfo string, Options map
 	//Online push message
 	log.InfoByKv("test", sendPbData.OperationID, "len  grpc", len(grpcCons), "data", sendPbData)
 	for _, v := range grpcCons {
+		//调用网关发送信息给客户端
 		msgClient := pbRelay.NewOnlineMessageRelayServiceClient(v)
 		reply, err := msgClient.MsgToUser(context.Background(), sendPbData)
 		if err != nil {

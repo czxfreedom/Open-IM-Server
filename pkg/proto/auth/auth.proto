@@ -30,6 +30,8 @@ message UserTokenResp {
 }
 
 service Auth {
+    //注册用户
     rpc UserRegister(UserRegisterReq) returns(UserRegisterResp);
+    //获取用户token
     rpc UserToken(UserTokenReq) returns(UserTokenResp);
 }

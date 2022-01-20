@@ -31,6 +31,7 @@ func (mc *HistoryConsumerHandler) Init() {
 
 }
 
+//消息写入mongodb
 func (mc *HistoryConsumerHandler) handleChatWs2Mongo(msg []byte, msgKey string) {
 	log.InfoByKv("chat come mongo!!!", "", "chat", string(msg))
 	time := utils.GetCurrentTimestampByNano()

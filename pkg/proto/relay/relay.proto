@@ -59,11 +59,12 @@ message GetUsersOnlineStatusResp{
     string userID = 1;
     string status = 2;
     repeated SuccessDetail detailPlatformStatus = 3;
-
   }
 }
 service OnlineMessageRelayService {
+  //发送消息给用户
   rpc MsgToUser(MsgToUserReq) returns(MsgToUserResp);
+  //根据用户id列表获取在线用户的状态
   rpc GetUsersOnlineStatus(GetUsersOnlineStatusReq)returns(GetUsersOnlineStatusResp);
 //  rpc SendMsgByWS(SendMsgByWSReq)  returns(MsgToUserResp);
 }

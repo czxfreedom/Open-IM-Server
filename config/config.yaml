@@ -59,14 +59,14 @@ serverip: 0.0.0.0
 
 # endpoints 内部组件间访问的端点host名称，访问时，可以内部直接访问 host:port 来访问
 endpoints:
-  api: openim_api
-  push: openim_push
-  msg_gateway: openim_msg_gateway
-  rpc_auth: openim_rpc_auth
-  rpc_friend: openim_rpc_friend
-  rpc_group: openim_rpc_group
-  rpc_msg: openim_rpc_msg
-  rpc_user: openim_rpc_user
+  api: 127.0.0.1
+  push: 127.0.0.1
+  msg_gateway: 127.0.0.1
+  rpc_auth: 127.0.0.1
+  rpc_friend: 127.0.0.1
+  rpc_group: 127.0.0.1
+  rpc_msg: 127.0.0.1
+  rpc_user: 127.0.0.1
 
 api:
   openImApiPort: [ 10000 ]

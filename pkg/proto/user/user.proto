@@ -109,11 +109,18 @@ message GetAllConversationMsgOptResp{
 
 
 service user {
+  //获取用户信息
   rpc getUserInfo(GetUserInfoReq) returns(GetUserInfoResp);
+  //更新用户信息
   rpc UpdateUserInfo(UpdateUserInfoReq) returns(CommonResp);
+  //删除用户信息
   rpc DeleteUsers(DeleteUsersReq)returns(DeleteUsersResp);
+  //获取说有用户id
   rpc GetAllUsersUid(GetAllUsersUidReq)returns(GetAllUsersUidResp);
+  //
   rpc SetReceiveMessageOpt(SetReceiveMessageOptReq)returns(SetReceiveMessageOptResp);
+  //
   rpc GetReceiveMessageOpt(GetReceiveMessageOptReq)returns(GetReceiveMessageOptResp);
+  //
   rpc GetAllConversationMsgOpt(GetAllConversationMsgOptReq)returns(GetAllConversationMsgOptResp);
 }

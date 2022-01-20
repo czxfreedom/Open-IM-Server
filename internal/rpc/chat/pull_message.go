@@ -13,6 +13,7 @@ import (
 	pbMsg "Open_IM/pkg/proto/chat"
 )
 
+//获取用户最大和最小的seq(从redis里面获取)
 func (rpc *rpcChat) GetMaxAndMinSeq(_ context.Context, in *pbMsg.GetMaxAndMinSeqReq) (*pbMsg.GetMaxAndMinSeqResp, error) {
 	log.InfoByKv("rpc getMaxAndMinSeq is arriving", in.OperationID, in.String())
 	//seq, err := model.GetBiggestSeqFromReceive(in.UserID)
@@ -41,6 +42,8 @@ func (rpc *rpcChat) GetMaxAndMinSeq(_ context.Context, in *pbMsg.GetMaxAndMinSeq
 	}
 	return resp, nil
 }
+
+//推送消息(从mongodb里面获取)
 func (rpc *rpcChat) PullMessage(_ context.Context, in *pbMsg.PullMessageReq) (*pbMsg.PullMessageResp, error) {
 	log.InfoByKv("rpc pullMessage is arriving", in.OperationID, "args", in.String())
 	resp := new(pbMsg.PullMessageResp)
@@ -64,6 +67,8 @@ func (rpc *rpcChat) PullMessage(_ context.Context, in *pbMsg.PullMessageReq) (*p
 		GroupUserMsg:  respGroupMsgFormat,
 	}, nil
 }
+
+//根据seq列表获取数据并推送(通过mongodb)
 func (rpc *rpcChat) PullMessageBySeqList(_ context.Context, in *pbMsg.PullMessageBySeqListReq) (*pbMsg.PullMessageResp, error) {
 	log.NewInfo(in.OperationID, "rpc PullMessageBySeqList is arriving", in.String())
 	resp := new(pbMsg.PullMessageResp)

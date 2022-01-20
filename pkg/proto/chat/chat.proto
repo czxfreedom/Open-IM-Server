@@ -107,7 +107,6 @@ message MsgFormat{
 }
 
 message UserSendMsgReq {
-
   int32 ReqIdentifier = 1;
   string Token = 2;
   string SendID = 3;
@@ -126,8 +125,6 @@ message UserSendMsgReq {
   string OffLineInfo = 16;
   string Ex = 17;
   int64 sendTime = 18;
-
-
 }
 
 message UserSendMsgResp {
@@ -140,8 +137,12 @@ message UserSendMsgResp {
 
 }
 service Chat {
+  //获取用户最大和最新的seq
   rpc GetMaxAndMinSeq(GetMaxAndMinSeqReq) returns(GetMaxAndMinSeqResp);
+  //根据用户开始,结束seq推送聊天消息
   rpc PullMessage(PullMessageReq) returns(PullMessageResp);
+  //根据用户seq列表推送聊天消息
   rpc PullMessageBySeqList(PullMessageBySeqListReq) returns(PullMessageResp);
+  //发送聊天消息
   rpc UserSendMsg(UserSendMsgReq) returns(UserSendMsgResp);
 }

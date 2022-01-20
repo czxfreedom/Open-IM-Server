@@ -108,6 +108,7 @@ func (rpc *rpcChat) UserSendMsg(_ context.Context, pb *pbChat.UserSendMsgReq) (*
 	switch pbData.SessionType {
 	case constant.SingleChatType:
 		isSend := modifyMessageByUserMessageReceiveOpt(pbData.RecvID, pbData.SendID, constant.SingleChatType, &pbData)
+		//接收方在线
 		if isSend {
 			err1 := rpc.sendMsgToKafka(&pbData, pbData.RecvID)
 			if err1 != nil {
